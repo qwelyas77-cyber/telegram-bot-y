@@ -54,3 +54,29 @@ def webhook():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+from flask import Flask, request
+import telebot
+import os
+
+app = Flask(__name__)
+
+# هان حط التوكن الجديد بتاعك
+TOKEN = "هان_حط_التوكن_الجديد"
+bot = telebot.TeleBot(TOKEN)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    update = request.get_json()
+    bot.process_new_updates([telebot.types.Update.de_json(update)])
+    return 'OK', 200
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "أهلاً بك! البوت شغال ✅")
+
+@bot.message_handler(func=lambda m: True)
+def echo(message):
+    bot.reply_to(message, message.text)
+
+if __name__ == '__main__':
+    app.run()
