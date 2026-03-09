@@ -1,0 +1,4 @@
+
+TOKEN = "8690345615:AAHmkAF1dfs5KYno6BewlRTqFqnozzs8E0M"
+WEBHOOK_PATH = "/webhook"
+ADMIN_ID = 0
